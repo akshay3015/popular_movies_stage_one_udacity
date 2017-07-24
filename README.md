@@ -1,5 +1,5 @@
 # popular_movies_stage_two_udacity
-This project is developed for completion of Udacity popular movies satge 1
+This project is developed for completion of Udacity popular movies satge 2
 
 ## Features
  - Ability to bookmark favourite movies
@@ -17,6 +17,6 @@ This project is developed for completion of Udacity popular movies satge 1
  
 ## ScreenShots - Phone
 <div style="display:flex;" >
-<img style="margin-left:10px;" src="screenshots/Screen1.png" width="29%" >
-<img style="margin-left:10px;" src="screenshots/Screen2.png" width="29%" >
-<img style="margin-left:10px;" src="screenshots/Screen3.png" width="29%" >
+<img style="margin-left:10px;" src="Screenshots/Screen1.png" width="29%" >
+<img style="margin-left:10px;" src="Screenshots/Screen2.png" width="29%" >
+<img style="margin-left:10px;" src="Screenshots/Screen3.png" width="29%" >
