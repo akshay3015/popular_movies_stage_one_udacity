@@ -14,7 +14,7 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField "String", "api_key", '"3cf488a0d3173fb9a527b015139f22f4"'
+            buildConfigField "String", "api_key", '"your_api_key"'
         }
         release {
             minifyEnabled false
