@@ -14,7 +14,7 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField "String", "api_key", '"Your_api_key_goes_here"'
+            buildConfigField "String", "api_key", '"3cf488a0d3173fb9a527b015139f22f4"'
         }
         release {
             minifyEnabled false
@@ -37,17 +37,17 @@ dependencies {
     })
     // support libs
     compile 'com.android.support:appcompat-v7:'+supportlibversion
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:recyclerview-v7:'+supportlibversion
-
-
+    compile 'com.android.support:appcompat-v7:'+supportlibversion
+    compile 'com.android.support:design:'+supportlibversion
 
 
     // used for image caching and downloading
     compile 'com.squareup.picasso:picasso:'+picassoversion
 
-    compile 'com.android.support:appcompat-v7:'+supportlibversion
+
 
     // used for networking
 

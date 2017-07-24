@@ -8,8 +8,9 @@ import android.net.NetworkInfo;
  * Created by akshayshahane on 08/06/17.
  */
 
-public class Utils {
+public final  class Utils {
 
+    private Utils(){}
 
     public static boolean isNetworkAvailble(Context ctx){
         ConnectivityManager cm =

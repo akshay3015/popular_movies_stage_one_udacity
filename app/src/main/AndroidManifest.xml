@@ -18,7 +18,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MoviesDetails" android:screenOrientation="portrait"/>
+        <activity android:name=".MoviesDetailsActivity" />
+
+        <provider
+            android:authorities="com.example.android.popularmoviesstageone"
+            android:name="com.example.android.popularmoviesstageone.db.FavMoviesProvider"
+            android:exported="false"/>
 
     </application>
 
