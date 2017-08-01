@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Lis
     private GridLayoutManager gridLayoutManager;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,6 +132,8 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Lis
                 switch (item.getItemId()) {
 
                     case R.id.action_top_rated:
+                        positionBottomMenu = 0;
+                        mAdapter = new MoviesAdapter(moviesList, MainActivity.this);
                         mRvMovies.setAdapter(mAdapter);
                         if (b == null) {
                             if (Utils.isNetworkAvailble(MainActivity.this)) {
@@ -146,13 +147,13 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Lis
                                 moviesList.clear();
                                 mAdapter.notifyDataSetChanged();
                             }
-                            positionBottomMenu = 0;
+
                         } else {
                             getSupportActionBar().setTitle(R.string.top_rated);
                             mRvMovies.setVisibility(View.VISIBLE);
                             mTvErrorMessageDisplay.setVisibility(View.INVISIBLE);
 
-                            if (popularMoviesList.size() < 1) {
+                            if (moviesList.size() < 1) {
 
 
                                 getListOfTopRatedMovies();
@@ -166,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Lis
                         break;
 
                     case R.id.action_popular:
-//
+                        positionBottomMenu = 1;
                         mAdapter = new MoviesAdapter(popularMoviesList, MainActivity.this);
                         mRvMovies.setAdapter(mAdapter);
                         if (b == null) {
@@ -181,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Lis
                                 mAdapter.notifyDataSetChanged();
                                 Toast.makeText(MainActivity.this, R.string.no_internet, Toast.LENGTH_SHORT).show();
                             }
-                            positionBottomMenu = 1;
+
                         } else {
                             getSupportActionBar().setTitle(R.string.popular_movies);
 
@@ -201,6 +202,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Lis
                         break;
 
                     case R.id.action_favorites:
+
                         mAdapter = new MoviesAdapter(favoriteMoviesList, MainActivity.this);
                         mRvMovies.setAdapter(mAdapter);
                         getSupportActionBar().setTitle(R.string.favorites);
@@ -402,44 +404,42 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Lis
     @Override
     public void onListItemClick(int position) {
 
-       switch (positionBottomMenu){
+        switch (positionBottomMenu) {
 
-           case 0 :
-               Intent i = new Intent(MainActivity.this, MoviesDetailsActivity.class);
-               i.putExtra("title", moviesList.get(position).getTitle());
-               i.putExtra("poster_url", moviesList.get(position).getMoviePosterUrl());
-               i.putExtra("release_date", moviesList.get(position).getReleaseDate());
-               i.putExtra("rating", moviesList.get(position).getRatings());
-               i.putExtra("plot", moviesList.get(position).getPlotSynopsis());
-               i.putExtra("id", moviesList.get(position).getId());
-               startActivity(i);
-               break;
-
-
-           case 1 :
-               Intent iPopular = new Intent(MainActivity.this, MoviesDetailsActivity.class);
-               iPopular.putExtra("title", popularMoviesList.get(position).getTitle());
-               iPopular.putExtra("poster_url", popularMoviesList.get(position).getMoviePosterUrl());
-               iPopular.putExtra("release_date", popularMoviesList.get(position).getReleaseDate());
-               iPopular.putExtra("rating", popularMoviesList.get(position).getRatings());
-               iPopular.putExtra("plot", popularMoviesList.get(position).getPlotSynopsis());
-               iPopular.putExtra("id", popularMoviesList.get(position).getId());
-               startActivity(iPopular);
-               break;
-
-           case 2 :
-               Intent iFav = new Intent(MainActivity.this, MoviesDetailsActivity.class);
-               iFav.putExtra("title", favoriteMoviesList.get(position).getTitle());
-               iFav.putExtra("poster_url", favoriteMoviesList.get(position).getMoviePosterUrl());
-               iFav.putExtra("release_date", favoriteMoviesList.get(position).getReleaseDate());
-               iFav.putExtra("rating", favoriteMoviesList.get(position).getRatings());
-               iFav.putExtra("plot", favoriteMoviesList.get(position).getPlotSynopsis());
-               iFav.putExtra("id", favoriteMoviesList.get(position).getId());
-               startActivity(iFav);
-
-       }
+            case 0:
+                Intent i = new Intent(MainActivity.this, MoviesDetailsActivity.class);
+                i.putExtra("title", moviesList.get(position).getTitle());
+                i.putExtra("poster_url", moviesList.get(position).getMoviePosterUrl());
+                i.putExtra("release_date", moviesList.get(position).getReleaseDate());
+                i.putExtra("rating", moviesList.get(position).getRatings());
+                i.putExtra("plot", moviesList.get(position).getPlotSynopsis());
+                i.putExtra("id", moviesList.get(position).getId());
+                startActivity(i);
+                break;
 
 
+            case 1:
+                Intent iPopular = new Intent(MainActivity.this, MoviesDetailsActivity.class);
+                iPopular.putExtra("title", popularMoviesList.get(position).getTitle());
+                iPopular.putExtra("poster_url", popularMoviesList.get(position).getMoviePosterUrl());
+                iPopular.putExtra("release_date", popularMoviesList.get(position).getReleaseDate());
+                iPopular.putExtra("rating", popularMoviesList.get(position).getRatings());
+                iPopular.putExtra("plot", popularMoviesList.get(position).getPlotSynopsis());
+                iPopular.putExtra("id", popularMoviesList.get(position).getId());
+                startActivity(iPopular);
+                break;
+
+            case 2:
+                Intent iFav = new Intent(MainActivity.this, MoviesDetailsActivity.class);
+                iFav.putExtra("title", favoriteMoviesList.get(position).getTitle());
+                iFav.putExtra("poster_url", favoriteMoviesList.get(position).getMoviePosterUrl());
+                iFav.putExtra("release_date", favoriteMoviesList.get(position).getReleaseDate());
+                iFav.putExtra("rating", favoriteMoviesList.get(position).getRatings());
+                iFav.putExtra("plot", favoriteMoviesList.get(position).getPlotSynopsis());
+                iFav.putExtra("id", favoriteMoviesList.get(position).getId());
+                startActivity(iFav);
+
+        }
 
 
     }
