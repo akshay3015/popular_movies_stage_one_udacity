@@ -9,7 +9,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+
 
 import android.view.MenuItem;
 import android.view.View;
@@ -38,6 +38,7 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements MoviesAdapter.LisItemClickListener {
 
@@ -230,9 +231,9 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Lis
                 @Override
                 public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
 
-                    if (BuildConfig.DEBUG) {
-                        Log.d(TAG, "onResponse:  response" + response.body().toString());
-                    }
+
+                        Timber.d( response.body().toString());
+
                     if (response.code() == 200) {
 
                         try {
@@ -245,9 +246,10 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Lis
 
                                 Movie movieData = new Movie();
                                 JSONObject movieObj = moviesArray.getJSONObject(i);
-                                if (BuildConfig.DEBUG) {
-                                    Log.d(TAG, "onResponse: " + movieObj.getString("poster_path"));
-                                }
+
+
+                                    Timber.d(movieObj.getString("poster_path"));
+
                                 movieData.setMoviePosterUrl(movieObj.getString("poster_path"));
                                 movieData.setTitle(movieObj.getString("title"));
                                 movieData.setReleaseDate(movieObj.getString("release_date"));
@@ -263,10 +265,9 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Lis
                             mPbLoadingIndicator.setVisibility(View.INVISIBLE);
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
-                            if (BuildConfig.DEBUG) {
 
-                                Log.d(TAG, "onResponse: " + moviesResponse.getJSONArray("results").length());
-                            }
+
+                            Timber.d(""+moviesResponse.getJSONArray("results").length());
                         } catch (JSONException e) {
                             e.printStackTrace();
                             mPbLoadingIndicator.setVisibility(View.INVISIBLE);
@@ -289,9 +290,8 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Lis
                 @Override
                 public void onFailure(Call<JsonElement> call, Throwable t) {
 
-                    if (BuildConfig.DEBUG) {
-                        Log.d(TAG, "onFailure: " + t.toString());
-                    }
+
+                    Timber.e(t.getMessage());
                     mRvMovies.setVisibility(View.INVISIBLE);
                     mTvErrorMessageDisplay.setVisibility(View.VISIBLE);
                     mPbLoadingIndicator.setVisibility(View.INVISIBLE);
@@ -321,9 +321,9 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Lis
                 @Override
                 public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
 
-                    if (BuildConfig.DEBUG) {
-                        Log.d(TAG, "onResponse:  response" + response.body().toString());
-                    }
+
+
+                    Timber.d( response.body().toString());
 
                     if (response.code() == 200) {
 
@@ -338,10 +338,9 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Lis
                                 Movie movieData = new Movie();
                                 JSONObject movieObj = moviesArray.getJSONObject(i);
 
-                                if (BuildConfig.DEBUG) {
-                                    Log.d(TAG, "onResponse: " + movieObj.getString("poster_path"));
-                                    Log.d(TAG, "onResponse: title " + movieObj.getString("title"));
-                                }
+
+                                Timber.d( movieObj.getString("poster_path"));
+                                Timber.d(movieObj.getString("title"));
                                 movieData.setMoviePosterUrl(movieObj.getString("poster_path"));
                                 movieData.setTitle(movieObj.getString("title"));
                                 movieData.setReleaseDate(movieObj.getString("release_date"));
@@ -358,10 +357,10 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Lis
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
 
-                            if (BuildConfig.DEBUG) {
 
-                                Log.d(TAG, "onResponse: " + moviesResponse.getJSONArray("results").length());
-                            }
+
+
+                            Timber.d(""+moviesResponse.getJSONArray("results").length());
                         } catch (JSONException e) {
                             e.printStackTrace();
                             mPbLoadingIndicator.setVisibility(View.INVISIBLE);
@@ -384,14 +383,14 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Lis
                 @Override
                 public void onFailure(Call<JsonElement> call, Throwable t) {
 
-                    if (BuildConfig.DEBUG) {
-                        Log.d(TAG, "onFailure: " + t.toString());
+
+                        Timber.e(t.toString());
                         mRvMovies.setVisibility(View.GONE);
                         mTvErrorMessageDisplay.setVisibility(View.VISIBLE);
                         mPbLoadingIndicator.setVisibility(View.INVISIBLE);
                         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
-                    }
+
 
                 }
             });

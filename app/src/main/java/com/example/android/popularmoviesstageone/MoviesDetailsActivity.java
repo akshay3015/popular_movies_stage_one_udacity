@@ -51,6 +51,7 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 /**
  * Created by akshayshahane on 11/06/17.
@@ -210,15 +211,13 @@ public class MoviesDetailsActivity extends AppCompatActivity implements TrailerA
                 isFav = false;
             }
 
-            if (BuildConfig.DEBUG) {
-                Log.d(TAG, "isFavMovie:  isFav" + isFav);
-            }
+
+
+            Timber.d("isFavMovie:  isFav" + isFav);
             cursor.close();
 
         } else {
-            if (BuildConfig.DEBUG) {
-                Log.d(TAG, "isFavMovie: cursor is null ");
-            }
+            Timber.d("isFavMovie: cursor is null");
         }
     }
 
@@ -236,9 +235,9 @@ public class MoviesDetailsActivity extends AppCompatActivity implements TrailerA
             call.enqueue(new Callback<JsonElement>() {
                 @Override
                 public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                    if (BuildConfig.DEBUG) {
-                        Log.d(TAG, "onResponse:  response" + response.body().toString());
-                    }
+
+
+                    Timber.d( response.body().toString());
 
 
                     if (200 == response.code()) {
